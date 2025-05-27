@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      background: radial-gradient(circle at top left, #ffe6eb, #ffccda);
       color: #333;
       display: flex;
       flex-direction: column;
@@ -17,125 +17,129 @@
       margin: 0;
       padding: 2rem 1rem;
       text-align: center;
+      overflow-x: hidden;
     }
 
     h1 {
-      font-size: 2.8rem;
-      color: #880e4f;
+      font-size: 3rem;
+      color: #ad1457;
       margin-bottom: 1rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 1rem auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      transition: all 0.3s ease-in-out;
+      animation: popUp 0.4s ease-in-out;
+    }
+
+    @keyframes popUp {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     button {
-      background: linear-gradient(to right, #ec407a, #d81b60);
+      background: linear-gradient(to right, #ff4081, #f50057);
       color: white;
       border: none;
       padding: 1rem 2rem;
       margin: 0.5rem;
-      border-radius: 15px;
-      font-size: 1.2rem;
+      border-radius: 25px;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s;
+      transition: 0.3s ease;
     }
 
     button:hover {
-      transform: scale(1.07);
-      background: linear-gradient(to right, #d81b60, #ad1457);
-    }
-
-    #setup, #game, #log {
-      max-width: 600px;
-      width: 100%;
-    }
-
-    #question-box {
-      margin: 2rem 0;
-      font-size: 1.5rem;
-      background-color: #fff0f5;
-      border: 2px dashed #ec407a;
-      border-radius: 15px;
-      padding: 1.5rem;
-      min-height: 100px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #answer-section {
-      margin-top: 1rem;
-    }
-
-    #log {
-      margin-top: 2rem;
-      max-height: 150px;
-      overflow-y: auto;
-      font-size: 0.95rem;
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(to right, #f50057, #c51162);
+      transform: scale(1.05);
     }
 
     input {
       padding: 0.7rem;
       margin: 0.5rem;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 1rem;
-      width: calc(100% - 1rem);
+      width: 90%;
+    }
+
+    #log {
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 600px;
     }
   </style>
 </head>
 <body>
-  <h1>💞 Wij Twee - Vragenspel 💞</h1>
+  <h1>💘 Wij Twee - Game</h1>
 
-  <div id="setup">
-    <input id="player1" placeholder="Jouw naam" />
-    <input id="player2" placeholder="Naam van je partner" />
-    <button onclick="startGame()">🚀 Start</button>
+  <div class="card" id="setup">
+    <input id="player1" placeholder="Jouw naam 💁‍♀️" />
+    <input id="player2" placeholder="Naam van je partner 💁‍♂️" />
+    <button onclick="startGame()">Start het spel 🎲</button>
   </div>
 
-  <div id="game" style="display:none">
-    <div id="question-box">...</div>
-    <button onclick="nextStep()">🔁 Volgende stap</button>
-    <div id="answer-section">
-      <p>Wie gaat antwoorden?</p>
-      <button onclick="answer('player1')">🧍</button>
-      <button onclick="answer('player2')">🧑</button>
+  <div class="card" id="question-card" style="display:none">
+    <div id="question-box">Vraag of opdracht verschijnt hier...</div>
+    <div id="answer-section" style="margin-top:1rem;">
+      <button onclick="answer('player1')">👩‍❤️‍👨 Antwoord: Speler 1</button>
+      <button onclick="answer('player2')">👨‍❤️‍👨 Antwoord: Speler 2</button>
     </div>
-    <div id="log"></div>
+    <button onclick="nextStep()">Volgende ➡️</button>
   </div>
 
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/10/21/audio_6cdb4f58db.mp3" type="audio/mpeg">
-  </audio>
+  <div id="log"></div>
+
+  <audio id="funSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_64663dcd92.mp3"></audio>
 
   <script>
     const questions = [
       "Wat vond je van mij bij onze eerste ontmoeting?",
-      "Wat heb je in deze 6 maanden over jezelf geleerd door mij?",
-      "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
       "Wat is jouw favoriete herinnering met mij tot nu toe?",
+      "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
       "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
-      "Wanneer voelde je je echt verbonden met mij?",
-      "Wat vind je het leukste aan hoe wij omgaan met elkaar?",
-      "Wat is iets kleins wat ik doe, dat jij mist als we niet samen zijn?",
-      "Wat is iets wat jij voelt, maar nog nooit hardop hebt gezegd?",
-      "Wat is een moment waarop ik je echt raakte (positief)?"
+      "Wat had je niet van mij verwacht toen we elkaar leerden kennen?",
+      "Wat zou je nog over mij willen ontdekken?",
+      "Wat is een moment waarop ik je echt raakte (positief)?",
+      "Wat vind je het aantrekkelijkst aan mij zonder dat ik iets zeg of doe?",
+      "Wat maakt jou het meest comfortabel in onze intimiteit?",
+      "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?"
     ];
 
     const funTasks = [
-      "🕺 Doe een dansje van 10 seconden.",
-      "📸 Maak een gekke selfie samen.",
-      "🐵 Trek jullie gekste gezicht voor 5 seconden.",
-      "😎 Beschrijf elkaar met 3 emoji’s.",
-      "🎤 Zing 1 zin van een liedje die je aan de ander doet denken.",
-      "🧸 Knuffel elkaar zonder iets te zeggen, 15 seconden.",
-      "👀 Kijk elkaar 15 seconden aan zonder te lachen.",
-      "🎭 Doe een grappige imitatie van je partner.",
-      "🍿 Verzin samen een filmnaam over jullie relatie.",
-      "💋 Zeg 'Ik hou van jou' op de meest overdreven manier."
+      "🕺 Doe nu 3 gekke dansmoves.",
+      "📸 Maak samen een selfie alsof jullie net getrouwd zijn.",
+      "🎤 Zing het woord ‘liefde’ op je raarste toon.",
+      "🧸 Geef een knuffel van minimaal 10 seconden.",
+      "👀 Kijk elkaar aan en trek een serieus gezicht. Wie lacht, verliest.",
+      "🧠 Bedenk een rare koosnaam voor je partner — nu!",
+      "📞 Bel elkaar via telefoon en zeg ‘ik mis je’ met drama.",
+      "🍕 Zeg een lief compliment alsof je honger hebt.",
+      "🎭 Doe alsof je je partner nadoet. Act it out!",
+      "🤪 Laat je partner raden wat je favoriete guilty pleasure is."
     ];
 
-    let stepCounter = 0;
     let currentQuestion = '';
+    let stepCounter = 0;
     let p1 = 'Jij';
     let p2 = 'Ik';
 
@@ -143,13 +147,15 @@
       p1 = document.getElementById('player1').value || 'Jij';
       p2 = document.getElementById('player2').value || 'Ik';
       document.getElementById('setup').style.display = 'none';
-      document.getElementById('game').style.display = 'block';
+      document.getElementById('question-card').style.display = 'block';
       nextStep();
     }
 
     function nextStep() {
       stepCounter++;
-      if (stepCounter % 4 === 0) {
+      const isFun = stepCounter % 3 === 0;
+      document.getElementById('answer-section').style.display = isFun ? 'none' : 'block';
+      if (isFun) {
         showFunTask();
       } else {
         showQuestion();
@@ -159,22 +165,21 @@
     function showQuestion() {
       const index = Math.floor(Math.random() * questions.length);
       currentQuestion = questions[index];
-      document.getElementById('question-box').innerText = currentQuestion;
-      document.getElementById('answer-section').style.display = 'block';
+      document.getElementById('question-box').innerText = `❓ Vraag: ${currentQuestion}`;
     }
 
     function showFunTask() {
       const index = Math.floor(Math.random() * funTasks.length);
-      const task = funTasks[index];
-      document.getElementById('question-box').innerText = `🎉 MINI-OPDRACHT 🎉\n${task}`;
-      document.getElementById('answer-section').style.display = 'none';
+      currentQuestion = funTasks[index];
+      document.getElementById('question-box').innerText = `🎉 Fun opdracht! ${currentQuestion}`;
+      document.getElementById('funSound').play();
     }
 
     function answer(who) {
       const name = who === 'player1' ? p1 : p2;
       const log = document.getElementById('log');
       const entry = document.createElement('div');
-      entry.innerHTML = `<strong>${name}</strong> beantwoordde: <em>\"${currentQuestion}\"</em>`;
+      entry.innerHTML = `✅ <strong>${name}</strong> heeft geantwoord op: <em>"${currentQuestion}"</em>`;
       log.prepend(entry);
     }
   </script>
