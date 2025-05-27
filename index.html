@@ -96,6 +96,17 @@
       width: 0%;
       transition: width 0.4s ease-in-out;
     }
+
+    #video-container {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    iframe {
+      border-radius: 12px;
+      width: 100%;
+      max-width: 560px;
+    }
   </style>
 </head>
 <body>
@@ -110,6 +121,9 @@
   <div class="card" id="question-card" style="display:none">
     <div class="progress"><div id="progress-bar" class="bar"></div></div>
     <div id="question-box">Vraag of opdracht verschijnt hier...</div>
+    <div id="video-container">
+      <iframe id="slowDanceVideo" height="315" src="https://www.youtube.com/embed/AhBdU2lX3U4" title="Suzan & Freek - Als Het Avond Is" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <div id="answer-section" style="margin-top:1rem;">
       <button onclick="answer('player1')">👩‍❤️‍💋‍👨 Antwoord: Speler 1</button>
       <button onclick="answer('player2')">👨‍❤️‍💋‍👨 Antwoord: Speler 2</button>
@@ -134,10 +148,12 @@
       "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?"
     ];
 
+    const slowDanceTask = "🎵 Doe samen een slow dance op het liedje: ‘Als het avond is’ van Suzan & Freek. Speel het hieronder af en dans alsof jullie elkaar net opnieuw hebben gekozen.";
+
     const funTasks = [
-      "💃 Doe samen een slowmotion dans alsof jullie in een romantische film zitten.",
-      "📸 Maak een foto waarop jullie doen alsof jullie elkaar voor het eerst ontmoeten op vakantie.",
-      "🎤 Zeg het woord ‘liefde’ in vijf totaal verschillende emoties (zoals boos, verlegen, hysterisch).",
+      "🎲 Laat je partner een dier kiezen en doe dat dier na in een romantische bui — samen tegelijk!",
+      slowDanceTask,
+      "🎤 Fluister een geheime bijnaam voor je partner in hun oor — eentje die alleen jullie twee kennen vanaf nu.",
       "🧸 Geef een knuffel van minimaal 10 seconden.",
       "👀 Kijk elkaar aan en trek een serieus gezicht. Wie lacht, verliest.",
       "💋 Geef een kus op een plek die je partner kiest.",
@@ -171,6 +187,8 @@
       updateProgress();
       const isFun = stepCounter % 3 === 0;
       document.getElementById('answer-section').style.display = isFun ? 'none' : 'block';
+      document.getElementById('video-container').style.display = 'none';
+
       if (isFun) {
         showFunTask();
       } else {
@@ -187,7 +205,10 @@
     function showFunTask() {
       const index = Math.floor(Math.random() * funTasks.length);
       currentQuestion = funTasks[index];
-      document.getElementById('question-box').innerText = `🔥 Opdracht: ${currentQuestion}`;
+      document.getElementById('question-box').innerHTML = `🔥 Opdracht: ${currentQuestion}`;
+      if (currentQuestion === slowDanceTask) {
+        document.getElementById('video-container').style.display = 'block';
+      }
       document.getElementById('funSound').play();
     }
 
