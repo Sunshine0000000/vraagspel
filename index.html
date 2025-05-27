@@ -6,57 +6,66 @@
   <title>❤️ Wij Twee - Vragenspel ❤️</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to bottom right, #fce4ec, #f8bbd0);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
       color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       margin: 0;
-      padding: 2rem;
+      padding: 2rem 1rem;
       text-align: center;
-      animation: fadeIn 2s ease-in;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      overflow-x: hidden;
     }
 
     h1 {
       margin-bottom: 1rem;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: #880e4f;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     button {
-      background-color: #ec407a;
+      background: linear-gradient(to right, #ec407a, #d81b60);
       color: white;
       border: none;
       padding: 1rem 2rem;
       margin: 0.5rem;
-      border-radius: 12px;
+      border-radius: 15px;
       font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background 0.3s;
     }
+
     button:hover {
-      transform: scale(1.05);
-      background-color: #d81b60;
+      transform: scale(1.07);
+      background: linear-gradient(to right, #d81b60, #ad1457);
     }
 
     #question-box {
       margin: 2rem 0;
       font-size: 1.5rem;
-      min-height: 100px;
-      padding: 1rem;
-      background-color: #fff3f7;
+      background-color: #fff0f5;
       border: 2px dashed #ec407a;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      max-width: 600px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      min-height: 100px;
+      animation: popIn 0.8s ease-in-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     #answer-section {
@@ -68,11 +77,18 @@
       margin-top: 2rem;
       max-height: 150px;
       overflow-y: auto;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       background-color: #fff;
       padding: 1rem;
-      border-radius: 8px;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
     }
 
     audio {
@@ -88,7 +104,7 @@
     <button onclick="nextQuestion()">🔁 Volgende vraag</button>
   </div>
   <div id="answer-section">
-    <p>Wie gaat antwoorden?</p>
+    <p><span class="emoji">🧠</span>Wie gaat antwoorden?</p>
     <button onclick="answer('Jij')">🧍 Jij</button>
     <button onclick="answer('Ik')">🧑 Ik</button>
   </div>
@@ -125,14 +141,17 @@
     function nextQuestion() {
       const index = Math.floor(Math.random() * questions.length);
       currentQuestion = questions[index];
-      document.getElementById('question-box').innerText = currentQuestion;
+      const box = document.getElementById('question-box');
+      box.innerText = currentQuestion;
+      box.style.animation = 'popIn 0.8s ease-in-out';
+      void box.offsetWidth; // Restart animation trick
     }
 
     function answer(wie) {
       const log = document.getElementById('log');
       const entry = document.createElement('div');
-      entry.textContent = `${wie} beantwoordde: "${currentQuestion}"`;
-      log.appendChild(entry);
+      entry.innerHTML = `<strong>${wie}</strong> 📝 beantwoordde: "<em>${currentQuestion}</em>"`;
+      log.prepend(entry);
     }
   </script>
 </body>
