@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💘 Wij Twee - Spicy Game</title>
+  <title>💘 Wij twee - spicy game</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -19,14 +19,12 @@
       text-align: center;
       overflow-x: hidden;
     }
-
     h1 {
       font-size: 3rem;
       color: #ffe3ec;
       margin-bottom: 1rem;
       text-shadow: 2px 2px #ff69b4;
     }
-
     .card {
       backdrop-filter: blur(15px);
       background: rgba(255, 255, 255, 0.1);
@@ -38,7 +36,6 @@
       max-width: 600px;
       transition: all 0.3s ease-in-out;
     }
-
     button {
       background: linear-gradient(to right, #ff4081, #c51162);
       color: white;
@@ -51,12 +48,10 @@
       box-shadow: 0 0 15px #ff69b4;
       transition: 0.3s ease;
     }
-
     button:hover {
       background: linear-gradient(to right, #f50057, #aa0050);
       transform: scale(1.05);
     }
-
     input {
       padding: 0.8rem;
       margin: 0.5rem;
@@ -66,7 +61,6 @@
       width: 90%;
       background: #fff0f5;
     }
-
     #log {
       max-height: 200px;
       overflow-y: auto;
@@ -79,7 +73,6 @@
       width: 100%;
       max-width: 600px;
     }
-
     .progress {
       width: 100%;
       max-width: 600px;
@@ -89,7 +82,6 @@
       margin: 1rem auto;
       overflow: hidden;
     }
-
     .bar {
       height: 100%;
       background: #ff3366;
@@ -100,13 +92,11 @@
 </head>
 <body>
   <h1>🔥 Wij Twee - Spicy Game 🔥</h1>
-
   <div class="card" id="setup">
     <input id="player1" placeholder="Jouw naam 💁‍♀️" />
     <input id="player2" placeholder="Naam van je partner 💁‍♂️" />
     <button onclick="startGame()">Start het spel 🎲</button>
   </div>
-
   <div class="card" id="question-card" style="display:none">
     <div class="progress"><div id="progress-bar" class="bar"></div></div>
     <div id="question-box">Vraag of opdracht verschijnt hier...</div>
@@ -116,58 +106,65 @@
     </div>
     <button onclick="nextStep()">Volgende ➡️</button>
   </div>
-
   <div id="log"></div>
   <audio id="funSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_64663dcd92.mp3"></audio>
-
   <script>
     const questions = [
-  "Wat vond je van mij bij onze eerste ontmoeting?",
-  "Wat heb je in deze 6 maanden over jezelf geleerd door mij?",
-  "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
-  "Wat is jouw favoriete herinnering met mij tot nu toe?",
-  "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
-  "Wanneer voelde je je echt verbonden met mij?",
-  "Wat vind je het leukste aan hoe wij omgaan met elkaar?",
-  "Wat is iets kleins wat ik doe, dat jij mist als we niet samen zijn?",
-  "Wat vind je het spannendste aan hoe dit tussen ons gaat?",
-  "Wat had je niet van mij verwacht toen we elkaar leerden kennen?",
-  "Wat is iets wat je graag vaker samen zou willen doen?",
-  "Wat is iets wat jij voelt, maar nog nooit hardop hebt gezegd?",
-  "Wat is een moment waarop ik je echt raakte (positief)?",
-  "Wat is iets waarvan je hoopt dat het nooit verandert tussen ons?",
-  "Hoe zie jij onze relatie over 6 maanden?",
-  "Wat vind je dat wij samen goed doen als team?",
-  "Wat zou je nog over mij willen ontdekken?",
-  "Wat maakt jou zenuwachtig in deze relatie (al is het maar een beetje)?",
-  "Wat denk jij dat onze grootste kracht is?",
-  "Wat zou je tegen je 'ik' van 6 maanden geleden willen zeggen over ons?",
-  "Wat is de gekste bijnaam die je mij ooit zou willen geven (maar nog niet durfde)?",
-  "Wat is iets grappigs wat ik doe zonder het zelf door te hebben?",
-  "Wat was het domste moment dat we samen hadden — maar het wél hilarisch was?",
-  "Wat vind je het aantrekkelijkst aan mij zonder dat ik iets zeg of doe?",
-  "Wanneer voelde je je het meest fysiek verbonden met mij?",
-  "Wat zou je willen proberen qua intimiteit waar we nog niet over gepraat hebben?",
-  "Wat is een aanraking van mij die je altijd bijblijft?",
-  "Wat vind je sexy aan onze manier van communiceren?",
-  "Wat zie je ons samen doen over 1 jaar?",
-  "Wat is een ‘levensmoment’ waar je hoopt dat ik er zeker bij ben?",
-  "Wat zou je nooit willen dat er tussen ons verandert?",
-  "Als we samen een traditie zouden starten, wat zou het zijn?",
-  "Wat wil je dat ik weet over jouw toekomstplannen?",
-  "Wat betekent ‘een leven samen’ voor jou?",
-  "Wat is iets waarvan je dacht dat het raar was aan mij, maar nu stiekem leuk vindt?",
-  "Wat wil je dat ik beter begrijp over jou?",
-  "Wat is iets wat je mij nog zou willen leren?",
-  "Wat vind je het leukste aan hoe ik met anderen omga?",
-  "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?",
-  "Wat vind jij een underrated moment samen?",
-  "Wat is een klein gebaar van mij dat je eigenlijk nooit vergeet?",
-  "Wat is een liedje dat jou aan mij doet denken?",
-  "Wat is een fantasie of droom die je ooit samen met mij hoopt waar te maken?",
-  "Wat denk jij dat ik niet doorheb, maar wat jou diep raakt?"
-]; // Blijft zoals eerder ingevuld
-
+      "Wat vond je van mij bij onze eerste ontmoeting?",
+      "Wat heb je in deze 6 maanden over jezelf geleerd door mij?",
+      "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
+      "Wat is jouw favoriete herinnering met mij tot nu toe?",
+      "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
+      "Wanneer voelde je je echt verbonden met mij?",
+      "Wat vind je het leukste aan hoe wij omgaan met elkaar?",
+      "Wat zou je zeggen dat onze ‘stijl’ als koppel is?",
+      "Wat is iets kleins wat ik doe, dat jij mist als we niet samen zijn?",
+      "Wat vind je het spannendste aan hoe dit tussen ons gaat?",
+      "Wat had je niet van mij verwacht toen we elkaar leerden kennen?",
+      "Wat is iets wat je graag vaker samen zou willen doen?",
+      "Wat is een gekke inside joke die we hebben, waar je altijd om moet lachen?",
+      "Wat is iets wat jij voelt, maar nog nooit hardop hebt gezegd?",
+      "Wat is een moment waarop ik je echt raakte (positief)?",
+      "Wat is iets waarvan je hoopt dat het nooit verandert tussen ons?",
+      "Hoe zie jij onze relatie over 6 maanden?",
+      "Wat vind je dat wij samen goed doen als team?",
+      "Wat zou je nog over mij willen ontdekken?",
+      "Wat maakt jou zenuwachtig in deze relatie (al is het maar een beetje)?",
+      "Wat denk jij dat onze grootste kracht is als stel?",
+      "Wat zou je tegen je 'ik' van 6 maanden geleden willen zeggen over ons?",
+      "Wanneer voelde je je voor het eerst echt verliefd op mij?",
+      "Wat is de gekste bijnaam die je mij ooit zou willen geven (maar nog niet durfde)?",
+      "Wat is iets grappigs wat ik doe zonder het zelf door te hebben?",
+      "Als we samen een sketchshow hadden, wat zou ons typetje zijn?",
+      "Wat was het domste moment dat we samen hadden — maar het wél hilarisch was?",
+      "Wat is een inside joke van ons die je nooit meer vergeet?",
+      "Wat zou jouw slogan zijn als je een stripfiguur was in onze relatie?",
+      "Wat vind je het aantrekkelijkst aan mij zonder dat ik iets zeg of doe?",
+      "Wanneer voelde je je het meest fysiek verbonden met mij?",
+      "Wat zou je willen proberen qua intimiteit waar we nog niet over gepraat hebben?",
+      "Wat is een aanraking van mij die je altijd bijblijft?",
+      "Wat vind je sexy aan onze manier van communiceren?",
+      "Wat maakt jou het meest comfortabel in onze intimiteit?",
+      "Wat zie je ons samen doen over 1 jaar?",
+      "Wat is een ‘levensmoment’ waar je hoopt dat ik er zeker bij ben?",
+      "Wat zou je willen dat we leren doen als team?",
+      "Wat zou je nooit willen dat er tussen ons verandert?",
+      "Als we samen een traditie zouden starten, wat zou het zijn?",
+      "Wat wil je dat ik weet over jouw toekomstplannen?",
+      "Wat als we samen oud worden — hoe zie jij ons dan voor je?",
+      "Wat betekent ‘een leven samen’ voor jou?",
+      "Wat is iets waarvan je dacht dat het raar was aan mij, maar nu stiekem leuk vindt?",
+      "Wat wil je dat ik beter begrijp over jou?",
+      "Wat is iets wat je mij nog zou willen leren?",
+      "Wat vind je het leukste aan hoe ik met anderen omga?",
+      "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?",
+      "Wat vind jij een underrated moment samen?",
+      "Wat is een klein gebaar van mij dat je eigenlijk nooit vergeet?",
+      "Wat is een liedje dat jou aan mij doet denken?",
+      "Wat zou jij willen dat we als traditie houden tussen ons?",
+      "Wat is een fantasie of droom die je ooit samen met mij hoopt waar te maken?",
+      "Wat denk jij dat ik niet doorheb, maar wat jou diep raakt?"
+    ];
     const funTasks = [
       "💋 Geef een kus op een plek die je partner zelf kiest.",
       "👄 Fluister wat je het meest aantrekkelijk vindt aan je partner.",
@@ -180,56 +177,66 @@
       "📷 Laat je partner een sexy compliment fluisteren alsof je het opneemt.",
       "🧦 Trek op sexy manier een kledingstuk uit (alleen als je wil 😁)."
     ];
-
-    let currentQuestion = '';
-    let stepCounter = 0;
+    let steps = [];
+    let currentStep = 0;
+    let currentItem = '';
     let p1 = 'Jij';
     let p2 = 'Ik';
-    let totalSteps = 54;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function mixContent() {
+      const mixed = [];
+      const q = shuffle([...questions]);
+      const f = shuffle([...funTasks]);
+      let qIndex = 0, fIndex = 0;
+      while (qIndex < q.length || fIndex < f.length) {
+        if (qIndex < q.length) mixed.push({ type: 'vraag', text: q[qIndex++] });
+        if (qIndex < q.length) mixed.push({ type: 'vraag', text: q[qIndex++] });
+        if (fIndex < f.length) mixed.push({ type: 'opdracht', text: f[fIndex++] });
+      }
+      return mixed;
+    }
 
     function startGame() {
       p1 = document.getElementById('player1').value || 'Jij';
       p2 = document.getElementById('player2').value || 'Ik';
+      steps = mixContent();
       document.getElementById('setup').style.display = 'none';
       document.getElementById('question-card').style.display = 'block';
       nextStep();
     }
 
     function updateProgress() {
-      const progress = Math.min((stepCounter / totalSteps) * 100, 100);
+      const progress = Math.min((currentStep / steps.length) * 100, 100);
       document.getElementById('progress-bar').style.width = `${progress}%`;
     }
 
     function nextStep() {
-      stepCounter++;
-      updateProgress();
-      const isFun = stepCounter % 3 === 0;
-      document.getElementById('answer-section').style.display = isFun ? 'none' : 'block';
-      if (isFun) {
-        showFunTask();
-      } else {
-        showQuestion();
+      if (currentStep >= steps.length) {
+        document.getElementById('question-box').innerText = "🎉 Alles voltooid! Tijd voor een knuffel (of meer...)";
+        document.getElementById('answer-section').style.display = 'none';
+        return;
       }
-    }
-
-    function showQuestion() {
-      const index = Math.floor(Math.random() * questions.length);
-      currentQuestion = questions[index];
-      document.getElementById('question-box').innerText = `❓ Vraag: ${currentQuestion}`;
-    }
-
-    function showFunTask() {
-      const index = Math.floor(Math.random() * funTasks.length);
-      currentQuestion = funTasks[index];
-      document.getElementById('question-box').innerText = `🔥 Opdracht: ${currentQuestion}`;
-      document.getElementById('funSound').play();
+      const item = steps[currentStep++];
+      currentItem = item.text;
+      updateProgress();
+      document.getElementById('question-box').innerText = `${item.type === 'vraag' ? '❓ Vraag' : '🔥 Opdracht'}: ${item.text}`;
+      document.getElementById('answer-section').style.display = item.type === 'vraag' ? 'block' : 'none';
+      if (item.type === 'opdracht') document.getElementById('funSound').play();
     }
 
     function answer(who) {
       const name = who === 'player1' ? p1 : p2;
       const log = document.getElementById('log');
       const entry = document.createElement('div');
-      entry.innerHTML = `✅ <strong>${name}</strong> antwoordde op: <em>"${currentQuestion}"</em>`;
+      entry.innerHTML = `✅ <strong>${name}</strong> antwoordde op: <em>\"${currentItem}\"</em>`;
       log.prepend(entry);
     }
   </script>
