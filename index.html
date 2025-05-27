@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wij Twee - Vragenspel</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fce4ec;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    button {
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 0.5rem;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    #question-box {
+      margin: 2rem 0;
+      font-size: 1.4rem;
+      min-height: 80px;
+    }
+    #answer-section {
+      margin-top: 1rem;
+      display: none;
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>❤️ Wij Twee - Vragenspel ❤️</h1>
+  <div id="question-box">Klik op "Start" om te beginnen</div>
+  <div>
+    <button onclick="startGame()">Start</button>
+    <button onclick="nextQuestion()">Volgende vraag</button>
+  </div>
+  <div id="answer-section">
+    <p>Wie gaat antwoorden?</p>
+    <button onclick="answer('Jij')">Jij</button>
+    <button onclick="answer('Ik')">Ik</button>
+  </div>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/21/audio_6cdb4f58db.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const questions = [
+      "Wat vond je van mij bij onze eerste ontmoeting?",
+      "Wat heb je in deze 6 maanden over jezelf geleerd door mij?",
+      "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
+      "Wat is jouw favoriete herinnering met mij tot nu toe?",
+      "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
+      "Wanneer voelde je je echt verbonden met mij?",
+      "Wat vind je het leukste aan hoe wij omgaan met elkaar?",
+      "Wat zou je zeggen dat onze ‘stijl’ als koppel is?",
+      "Wat is iets kleins wat ik doe, dat jij mist als we niet samen zijn?",
+      "Wat vind je het spannendste aan hoe dit tussen ons gaat?",
+      // Voeg hier de rest toe als je wilt...
+    ];
+
+    let currentQuestion = '';
+
+    function startGame() {
+      document.getElementById('answer-section').style.display = 'block';
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      const index = Math.floor(Math.random() * questions.length);
+      currentQuestion = questions[index];
+      document.getElementById('question-box').innerText = currentQuestion;
+    }
+
+    function answer(wie) {
+      alert(`${wie} gaat antwoorden op: \n\n"${currentQuestion}"`);
+    }
+  </script>
+</body>
+</html>
