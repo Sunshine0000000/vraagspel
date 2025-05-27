@@ -96,17 +96,6 @@
       width: 0%;
       transition: width 0.4s ease-in-out;
     }
-
-    #video-container {
-      display: none;
-      margin-top: 1rem;
-    }
-
-    iframe {
-      border-radius: 12px;
-      width: 100%;
-      max-width: 560px;
-    }
   </style>
 </head>
 <body>
@@ -121,9 +110,6 @@
   <div class="card" id="question-card" style="display:none">
     <div class="progress"><div id="progress-bar" class="bar"></div></div>
     <div id="question-box">Vraag of opdracht verschijnt hier...</div>
-    <div id="video-container">
-      <iframe id="slowDanceVideo" height="315" src="https://www.youtube.com/embed/AhBdU2lX3U4" title="Suzan & Freek - Als Het Avond Is" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
     <div id="answer-section" style="margin-top:1rem;">
       <button onclick="answer('player1')">👩‍❤️‍💋‍👨 Antwoord: Speler 1</button>
       <button onclick="answer('player2')">👨‍❤️‍💋‍👨 Antwoord: Speler 2</button>
@@ -136,38 +122,70 @@
 
   <script>
     const questions = [
-      "Wat vond je van mij bij onze eerste ontmoeting?",
-      "Wat is jouw favoriete herinnering met mij tot nu toe?",
-      "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
-      "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
-      "Wat had je niet van mij verwacht toen we elkaar leerden kennen?",
-      "Wat zou je nog over mij willen ontdekken?",
-      "Wat is een moment waarop ik je echt raakte (positief)?",
-      "Wat vind je het aantrekkelijkst aan mij zonder dat ik iets zeg of doe?",
-      "Wat maakt jou het meest comfortabel in onze intimiteit?",
-      "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?"
-    ];
-
-    const slowDanceTask = "🎵 Doe samen een slow dance op het liedje: ‘Als het avond is’ van Suzan & Freek. Speel het hieronder af en dans alsof jullie elkaar net opnieuw hebben gekozen.";
+  "Wat vond je van mij bij onze eerste ontmoeting?",
+  "Wat heb je in deze 6 maanden over jezelf geleerd door mij?",
+  "Wat is een kleine gewoonte van mij die je stiekem heel leuk vindt?",
+  "Wat is jouw favoriete herinnering met mij tot nu toe?",
+  "Wat wil je nog graag samen doen wat we nog niet gedaan hebben?",
+  "Wanneer voelde je je echt verbonden met mij?",
+  "Wat vind je het leukste aan hoe wij omgaan met elkaar?",
+  "Wat is iets kleins wat ik doe, dat jij mist als we niet samen zijn?",
+  "Wat vind je het spannendste aan hoe dit tussen ons gaat?",
+  "Wat had je niet van mij verwacht toen we elkaar leerden kennen?",
+  "Wat is iets wat je graag vaker samen zou willen doen?",
+  "Wat is iets wat jij voelt, maar nog nooit hardop hebt gezegd?",
+  "Wat is een moment waarop ik je echt raakte (positief)?",
+  "Wat is iets waarvan je hoopt dat het nooit verandert tussen ons?",
+  "Hoe zie jij onze relatie over 6 maanden?",
+  "Wat vind je dat wij samen goed doen als team?",
+  "Wat zou je nog over mij willen ontdekken?",
+  "Wat maakt jou zenuwachtig in deze relatie (al is het maar een beetje)?",
+  "Wat denk jij dat onze grootste kracht is?",
+  "Wat zou je tegen je 'ik' van 6 maanden geleden willen zeggen over ons?",
+  "Wat is de gekste bijnaam die je mij ooit zou willen geven (maar nog niet durfde)?",
+  "Wat is iets grappigs wat ik doe zonder het zelf door te hebben?",
+  "Wat was het domste moment dat we samen hadden — maar het wél hilarisch was?",
+  "Wat vind je het aantrekkelijkst aan mij zonder dat ik iets zeg of doe?",
+  "Wanneer voelde je je het meest fysiek verbonden met mij?",
+  "Wat zou je willen proberen qua intimiteit waar we nog niet over gepraat hebben?",
+  "Wat is een aanraking van mij die je altijd bijblijft?",
+  "Wat vind je sexy aan onze manier van communiceren?",
+  "Wat zie je ons samen doen over 1 jaar?",
+  "Wat is een ‘levensmoment’ waar je hoopt dat ik er zeker bij ben?",
+  "Wat zou je nooit willen dat er tussen ons verandert?",
+  "Als we samen een traditie zouden starten, wat zou het zijn?",
+  "Wat wil je dat ik weet over jouw toekomstplannen?",
+  "Wat betekent ‘een leven samen’ voor jou?",
+  "Wat is iets waarvan je dacht dat het raar was aan mij, maar nu stiekem leuk vindt?",
+  "Wat wil je dat ik beter begrijp over jou?",
+  "Wat is iets wat je mij nog zou willen leren?",
+  "Wat vind je het leukste aan hoe ik met anderen omga?",
+  "Wat is een plek waar je heel graag met mij heen zou willen gaan — en waarom?",
+  "Wat vind jij een underrated moment samen?",
+  "Wat is een klein gebaar van mij dat je eigenlijk nooit vergeet?",
+  "Wat is een liedje dat jou aan mij doet denken?",
+  "Wat is een fantasie of droom die je ooit samen met mij hoopt waar te maken?",
+  "Wat denk jij dat ik niet doorheb, maar wat jou diep raakt?"
+]; // Blijft zoals eerder ingevuld
 
     const funTasks = [
-      "🎲 Laat je partner een dier kiezen en doe dat dier na in een romantische bui — samen tegelijk!",
-      slowDanceTask,
-      "🎤 Fluister een geheime bijnaam voor je partner in hun oor — eentje die alleen jullie twee kennen vanaf nu.",
-      "🧸 Geef een knuffel van minimaal 10 seconden.",
-      "👀 Kijk elkaar aan en trek een serieus gezicht. Wie lacht, verliest.",
-      "💋 Geef een kus op een plek die je partner kiest.",
-      "👄 Fluister wat je het meest sexy vindt aan de ander.",
-      "🧴 Geef een mini-massage van 1 minuut.",
-      "🛏️ Doe een mini-rollenspel van 30 seconden.",
-      "🎨 Teken met je vinger iets op de rug van je partner. Laat hen raden wat het is."
+      "💋 Geef een kus op een plek die je partner zelf kiest.",
+      "👄 Fluister wat je het meest aantrekkelijk vindt aan je partner.",
+      "👀 Beschrijf in detail wat je partner het mooist vindt aan jouw lichaam.",
+      "🧴 Geef een mini-massage van 1 minuut aan een plek naar keuze.",
+      "🛏️ Speel een mini-rollenspel van 30 seconden (verzin zelf).",
+      "💃 Doe een verleidelijke blik of beweging zonder lachen.",
+      "🎧 Vertel een geheime fantasie (je hoeft geen details te geven).",
+      "🎯 Raak je partner aan op 3 plekken die je lekker vindt (met toestemming natuurlijk 😇).",
+      "📷 Laat je partner een sexy compliment fluisteren alsof je het opneemt.",
+      "🧦 Trek op sexy manier een kledingstuk uit (alleen als je wil 😁)."
     ];
 
     let currentQuestion = '';
     let stepCounter = 0;
     let p1 = 'Jij';
     let p2 = 'Ik';
-    let totalSteps = 15;
+    let totalSteps = 54;
 
     function startGame() {
       p1 = document.getElementById('player1').value || 'Jij';
@@ -187,8 +205,6 @@
       updateProgress();
       const isFun = stepCounter % 3 === 0;
       document.getElementById('answer-section').style.display = isFun ? 'none' : 'block';
-      document.getElementById('video-container').style.display = 'none';
-
       if (isFun) {
         showFunTask();
       } else {
@@ -205,10 +221,7 @@
     function showFunTask() {
       const index = Math.floor(Math.random() * funTasks.length);
       currentQuestion = funTasks[index];
-      document.getElementById('question-box').innerHTML = `🔥 Opdracht: ${currentQuestion}`;
-      if (currentQuestion === slowDanceTask) {
-        document.getElementById('video-container').style.display = 'block';
-      }
+      document.getElementById('question-box').innerText = `🔥 Opdracht: ${currentQuestion}`;
       document.getElementById('funSound').play();
     }
 
