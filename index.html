@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>❤️ Wij Twee - Vragenspel ❤️</title>
+  <title>💘 Wij Twee - Spicy Game</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at top left, #ffe6eb, #ffccda);
-      color: #333;
+      background: radial-gradient(circle at top left, #2e003e, #ff4081);
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,35 +22,25 @@
 
     h1 {
       font-size: 3rem;
-      color: #ad1457;
+      color: #ffe3ec;
       margin-bottom: 1rem;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+      text-shadow: 2px 2px #ff69b4;
     }
 
     .card {
-      background: white;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       padding: 2rem;
       margin: 1rem auto;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
       width: 100%;
       max-width: 600px;
       transition: all 0.3s ease-in-out;
-      animation: popUp 0.4s ease-in-out;
-    }
-
-    @keyframes popUp {
-      0% { transform: scale(0.9); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
     }
 
     button {
-      background: linear-gradient(to right, #ff4081, #f50057);
+      background: linear-gradient(to right, #ff4081, #c51162);
       color: white;
       border: none;
       padding: 1rem 2rem;
@@ -58,39 +48,58 @@
       border-radius: 25px;
       font-size: 1.1rem;
       cursor: pointer;
+      box-shadow: 0 0 15px #ff69b4;
       transition: 0.3s ease;
     }
 
     button:hover {
-      background: linear-gradient(to right, #f50057, #c51162);
+      background: linear-gradient(to right, #f50057, #aa0050);
       transform: scale(1.05);
     }
 
     input {
-      padding: 0.7rem;
+      padding: 0.8rem;
       margin: 0.5rem;
       border-radius: 10px;
-      border: 1px solid #ccc;
+      border: none;
       font-size: 1rem;
       width: 90%;
+      background: #fff0f5;
     }
 
     #log {
       max-height: 200px;
       overflow-y: auto;
       font-size: 0.95rem;
-      background: #fff;
+      background: #fff0f5;
+      color: #333;
       padding: 1rem;
       border-radius: 12px;
       margin-top: 1rem;
-      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
       width: 100%;
       max-width: 600px;
+    }
+
+    .progress {
+      width: 100%;
+      max-width: 600px;
+      height: 12px;
+      background: #ffb3c1;
+      border-radius: 10px;
+      margin: 1rem auto;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      background: #ff3366;
+      width: 0%;
+      transition: width 0.4s ease-in-out;
     }
   </style>
 </head>
 <body>
-  <h1>💘 Wij Twee - Game</h1>
+  <h1>🔥 Wij Twee - Spicy Game 🔥</h1>
 
   <div class="card" id="setup">
     <input id="player1" placeholder="Jouw naam 💁‍♀️" />
@@ -99,16 +108,16 @@
   </div>
 
   <div class="card" id="question-card" style="display:none">
+    <div class="progress"><div id="progress-bar" class="bar"></div></div>
     <div id="question-box">Vraag of opdracht verschijnt hier...</div>
     <div id="answer-section" style="margin-top:1rem;">
-      <button onclick="answer('player1')">👩‍❤️‍👨 Antwoord: Speler 1</button>
-      <button onclick="answer('player2')">👨‍❤️‍👨 Antwoord: Speler 2</button>
+      <button onclick="answer('player1')">👩‍❤️‍💋‍👨 Antwoord: Speler 1</button>
+      <button onclick="answer('player2')">👨‍❤️‍💋‍👨 Antwoord: Speler 2</button>
     </div>
     <button onclick="nextStep()">Volgende ➡️</button>
   </div>
 
   <div id="log"></div>
-
   <audio id="funSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_64663dcd92.mp3"></audio>
 
   <script>
@@ -131,17 +140,18 @@
       "🎤 Zing het woord ‘liefde’ op je raarste toon.",
       "🧸 Geef een knuffel van minimaal 10 seconden.",
       "👀 Kijk elkaar aan en trek een serieus gezicht. Wie lacht, verliest.",
-      "🧠 Bedenk een rare koosnaam voor je partner — nu!",
-      "📞 Bel elkaar via telefoon en zeg ‘ik mis je’ met drama.",
-      "🍕 Zeg een lief compliment alsof je honger hebt.",
-      "🎭 Doe alsof je je partner nadoet. Act it out!",
-      "🤪 Laat je partner raden wat je favoriete guilty pleasure is."
+      "💋 Geef een kus op een plek die je partner kiest.",
+      "👄 Fluister wat je het meest sexy vindt aan de ander.",
+      "🧴 Geef een mini-massage van 1 minuut.",
+      "🛏️ Doe een mini-rollenspel van 30 seconden.",
+      "🎧 Vertel je geheime fantasie in 1 zin."
     ];
 
     let currentQuestion = '';
     let stepCounter = 0;
     let p1 = 'Jij';
     let p2 = 'Ik';
+    let totalSteps = 15;
 
     function startGame() {
       p1 = document.getElementById('player1').value || 'Jij';
@@ -151,8 +161,14 @@
       nextStep();
     }
 
+    function updateProgress() {
+      const progress = Math.min((stepCounter / totalSteps) * 100, 100);
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+    }
+
     function nextStep() {
       stepCounter++;
+      updateProgress();
       const isFun = stepCounter % 3 === 0;
       document.getElementById('answer-section').style.display = isFun ? 'none' : 'block';
       if (isFun) {
@@ -171,7 +187,7 @@
     function showFunTask() {
       const index = Math.floor(Math.random() * funTasks.length);
       currentQuestion = funTasks[index];
-      document.getElementById('question-box').innerText = `🎉 Fun opdracht! ${currentQuestion}`;
+      document.getElementById('question-box').innerText = `🔥 Opdracht: ${currentQuestion}`;
       document.getElementById('funSound').play();
     }
 
@@ -179,7 +195,7 @@
       const name = who === 'player1' ? p1 : p2;
       const log = document.getElementById('log');
       const entry = document.createElement('div');
-      entry.innerHTML = `✅ <strong>${name}</strong> heeft geantwoord op: <em>"${currentQuestion}"</em>`;
+      entry.innerHTML = `✅ <strong>${name}</strong> antwoordde op: <em>"${currentQuestion}"</em>`;
       log.prepend(entry);
     }
   </script>
